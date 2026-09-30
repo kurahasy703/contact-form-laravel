@@ -83,6 +83,7 @@ erDiagram
     categories ||--o{ contacts : "has"
     contacts ||--o{ contact_tag : "has"
     tags ||--o{ contact_tag : "has"
+    ```
 💻 セットアップ手順
 1. リポジトリのクローン
 git clone git@github.com:kurahasy703/contact-form-laravel.git
