@@ -1,25 +1,16 @@
-# お問い合わせ管理システム (Contact Form App)
-
-Laravel 10/11 で構築した、お問い合わせフォームおよび管理者向けダッシュボード（SSR / API / CSV出力 / 自動テスト対応）アプリケーションです。
-
----
-
 ## 🚀 機能概要
 
 ### 1. ユーザー向け機能 (SSR)
-
 - **お問い合わせ入力・確認・完了画面**: 入力チェックおよび確認画面を挟む送信フロー（PRGパターン対応）
 - **バリデーション & エラー復元**: 入力エラー時に `old()` ヘルパーで入力値を保持し、日本語エラーメッセージを表示
 
 ### 2. 管理者向け機能 (SSR)
-
 - **認証機能**: Laravel Fortify を用いたセキュアなログイン・ログアウト
 - **ダッシュボード**: お問い合わせ一覧表示・詳細表示・削除
 - **絞り込み検索**: キーワード、性別、カテゴリ、日付指定による複数条件検索
 - **タグ管理**: お問い合わせへのタグ付与およびタグ自体のCRUD操作
 
 ### 3. 応用・品質保証機能
-
 - **CSVエクスポート**: 大量データでもメモリを圧迫しないストリーム配信（`streamDownload`）と UTF-8 BOM（Excel文字化け防止）対応
 - **RESTful API**: `JsonResource` を使用したレスポンス整形および標準 HTTP ステータスコードの返却
 - **自動テスト**: SQLite インメモリ環境による Feature テストの実装
@@ -40,7 +31,7 @@ Laravel 10/11 で構築した、お問い合わせフォームおよび管理者
 
 ## 📊 データベース設計 (ER図)
 
-````mermaid
+```mermaid
 erDiagram
     users {
         bigint id PK
@@ -80,9 +71,9 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    categories ||--o{ contacts : ""
-    contacts ||--o{ contact_tag : ""
-    tags ||--o{ contact_tag : ""
+    categories ||--o{ contacts : "1対多"
+    contacts ||--o{ contact_tag : "1対多"
+    tags ||--o{ contact_tag : "1対多"
 💻 セットアップ手順
 1. リポジトリのクローン
 git clone git@github.com:kurahasy703/contact-form-laravel.git
@@ -106,19 +97,3 @@ cp .env.example .env
 🔀 Git ブランチ運用ルール
 main: 安定版コードの管理
 feature/*: 機能開発用ブランチ（例: feature/10-csv-export）
-
----
-
-### 💡 貼り付け後の修正＆コミット手順
-
-1. VS Code 等で `README.md` を開きます。
-2. 中身をすべて消して、上のコードをそのまま貼り付けて保存（`Ctrl + S` / `Cmd + S`）します。
-3. VS Code で **`Ctrl + Shift + V`（Macは `Cmd + Shift + V`）** を押すと、きれいに装飾されたプレビュー画面で確認できます。
-4. ターミナルで GitHub に更新を送信します：
-
-```bash
-git add README.md
-git commit -m "style: Fix README.md formatting and line breaks"
-git push origin main
-````
-
