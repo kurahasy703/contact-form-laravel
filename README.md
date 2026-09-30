@@ -1,16 +1,19 @@
 ## 🚀 機能概要
 
 ### 1. ユーザー向け機能 (SSR)
+
 - **お問い合わせ入力・確認・完了画面**: 入力チェックおよび確認画面を挟む送信フロー（PRGパターン対応）
 - **バリデーション & エラー復元**: 入力エラー時に `old()` ヘルパーで入力値を保持し、日本語エラーメッセージを表示
 
 ### 2. 管理者向け機能 (SSR)
+
 - **認証機能**: Laravel Fortify を用いたセキュアなログイン・ログアウト
 - **ダッシュボード**: お問い合わせ一覧表示・詳細表示・削除
 - **絞り込み検索**: キーワード、性別、カテゴリ、日付指定による複数条件検索
 - **タグ管理**: お問い合わせへのタグ付与およびタグ自体のCRUD操作
 
 ### 3. 応用・品質保証機能
+
 - **CSVエクスポート**: 大量データでもメモリを圧迫しないストリーム配信（`streamDownload`）と UTF-8 BOM（Excel文字化け防止）対応
 - **RESTful API**: `JsonResource` を使用したレスポンス整形および標準 HTTP ステータスコードの返却
 - **自動テスト**: SQLite インメモリ環境による Feature テストの実装
@@ -71,9 +74,10 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    categories ||--o{ contacts : "1対多"
-    contacts ||--o{ contact_tag : "1対多"
-    tags ||--o{ contact_tag : "1対多"
+    categories ||--o{ contacts : "has"
+    contacts ||--o{ contact_tag : "has"
+    tags ||--o{ contact_tag : "has"
+
 💻 セットアップ手順
 1. リポジトリのクローン
 git clone git@github.com:kurahasy703/contact-form-laravel.git
@@ -97,3 +101,4 @@ cp .env.example .env
 🔀 Git ブランチ運用ルール
 main: 安定版コードの管理
 feature/*: 機能開発用ブランチ（例: feature/10-csv-export）
+```
