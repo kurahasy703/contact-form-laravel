@@ -40,7 +40,7 @@ Laravel 10/11 で構築した、お問い合わせフォームおよび管理者
 
 ## 📊 データベース設計 (ER図)
 
-````mermaid
+```mermaid
 erDiagram
     users {
         bigint id PK
@@ -83,37 +83,56 @@ erDiagram
     categories ||--o{ contacts : "has"
     contacts ||--o{ contact_tag : "has"
     tags ||--o{ contact_tag : "has"
-    ```
+```
 
-💻 セットアップ手順
-1. リポジトリのクローン
+---
+
+## 💻 セットアップ手順
+
+### 1. リポジトリのクローン
+
+```bash
 git clone git@github.com:kurahasy703/contact-form-laravel.git
 cd contact-form-laravel
-2. 環境変数の設定
+```
+
+### 2. 環境変数の設定
+
+```bash
 cp .env.example .env
-3. Docker (Sail) の起動とパッケージインストール
+```
+
+### 3. Docker (Sail) の起動とパッケージインストール
+
+```bash
 ./vendor/bin/sail up -d
 ./vendor/bin/sail composer install
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run build
-4. データベースのセットアップ
+```
+
+### 4. データベースのセットアップ
+
+```bash
 ./vendor/bin/sail artisan key:generate
 ./vendor/bin/sail artisan migrate:fresh --seed
-🧪 テスト・コード整形
+```
+
+---
+
+## 🧪 テスト・コード整形
+
+```bash
 # 自動テストの実行
 ./vendor/bin/sail test
 
 # コード自動整形
 ./vendor/bin/sail pint
-🔀 Git ブランチ運用ルール
-main: 安定版コードの管理
-feature/*: 機能開発用ブランチ（例: feature/10-csv-export）
+```
 
-#### 3. ファイルを保存（Ctrl+S または Cmd+S）する
+---
 
-#### 4. ターミナルでプッシュコマンドを実行する
-```bash
-git add README.md
-git commit -m "fix: ensure mermaid block is properly closed"
-git push origin main
-````
+## 🔀 Git ブランチ運用ルール
+
+- `main`: 安定版コードの管理
+- `feature/*`: 機能開発用ブランチ（例: `feature/10-csv-export`）
